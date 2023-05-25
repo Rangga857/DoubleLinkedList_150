@@ -28,4 +28,10 @@ DoubleLinkedList::DoubleLinkedList() {
 	START = NULL;
 }
 
+void DoubleLinkedList::addNode() {
+	int nim;
+	string nm;
+
+}
+
 
