@@ -2,9 +2,12 @@
 #include <string>
 using namespace std;
 
-class node {
+class Node {
 public: 
 	int noMhs;
 	string name;
-	
+	Node* next;
+	Node* prev;
 };
+
+
