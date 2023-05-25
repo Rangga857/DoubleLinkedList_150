@@ -19,7 +19,7 @@ public:
 	bool search(int rollNo, Node** previous, Node** current);
 	bool ListEmpty();
 	void traverse();
-
+	void revtraverse();
 
 };
 
