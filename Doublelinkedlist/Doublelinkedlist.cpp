@@ -28,6 +28,7 @@ public:
 DoubleLinkedList ::DoubleLinkedList() {
 	START = NULL;
 }
+
 void DoubleLinkedList::addNode() {
 	int nim;
 	string nm;
@@ -52,6 +53,7 @@ void DoubleLinkedList::addNode() {
 		START = newNode; //Step 6
 		return;
 	}
+
 	/*inserting a Node Between Two Nodes in the List*/
 	Node* current = START; //step1 a.
 	Node* previous = NULL;
@@ -65,12 +67,14 @@ void DoubleLinkedList::addNode() {
 		cout << "\nDuplicate roll Numbers not allowed" << endl;
 		return;
 	}
+
 	newNode->next = current->next; //step 4
 	newNode->prev = current; //step 5
 	if (current->next != NULL)
 		current->next->prev = newNode; //step 6
 	current->next = newNode;//step 7
 }
+
 bool DoubleLinkedList::search(int rollNo, Node** previous, Node** current) {
 	*previous = START; //stepp 1.a
 	*current = START; // step 1.b
@@ -80,12 +84,12 @@ bool DoubleLinkedList::search(int rollNo, Node** previous, Node** current) {
 	}
 	return (*current != NULL);
 }
+
 bool DoubleLinkedList::deleteNode(int rollNo) {
 	Node* previous, * current;
 	previous = current = NULL;
 	if (search(rollNo, &previous, &current) == false)
 		return false;
-
 	if (current->next != NULL)
 		current->next->prev = previous;
 	if (previous != NULL)
@@ -96,6 +100,7 @@ bool DoubleLinkedList::deleteNode(int rollNo) {
 	delete current;
 	return true;
 }
+
 bool DoubleLinkedList::ListEmpty() {
 	return (START == NULL);
 }
@@ -111,13 +116,13 @@ void DoubleLinkedList::traverse() {
 			currentNode = currentNode->next;
 		}
 	}
-
 }
 
 void DoubleLinkedList::revtraverse() {
 	if (ListEmpty()) {
 		cout << "\nList is empty" << endl;
 	}
+
 	else {
 		cout << "\nRecords in a]descending order of roll number are: " << endl;
 		Node* currentNode = START;
@@ -125,6 +130,7 @@ void DoubleLinkedList::revtraverse() {
 			currentNode = currentNode->next;
 
 		while (currentNode != NULL) {
+			cout << currentNode->noMhs << " " << currentNode->name << endl;
 			currentNode = currentNode->prev;
 		}
 	}
@@ -133,6 +139,7 @@ void DoubleLinkedList::revtraverse() {
 void DoubleLinkedList::hapus() {
 	if (ListEmpty()) {
 		cout << "list is empty" << endl;
+
 	}
 	cout << "\nEnter the roll number of the student whose record is to be deleted: ";
 	int rollNo;
@@ -143,7 +150,6 @@ void DoubleLinkedList::hapus() {
 	else
 		cout << "Record with roll number" << rollNo << " deleted" << endl;
 }
-
 void DoubleLinkedList::searchData() {
 	if (ListEmpty() == true) {
 		cout << "\nList is Empty" << endl;
@@ -162,7 +168,6 @@ void DoubleLinkedList::searchData() {
 	}
 
 }
-
 
 int main() {
 	DoubleLinkedList obj;
@@ -184,42 +189,16 @@ int main() {
 				obj.addNode();
 				break;
 			case '2' :
-				if (obj.ListEmpty()) {
-					cout << "\nList Empty" << endl;
-					break;
-				}
-				cout << "\nEnter the roll number of the student whose record is to be deleted: ";
-				int rollNo;
-				cin >> rollNo;
-				cout << endl;
-				if (obj.deleteNode(rollNo) == false)
-					cout << "Record not found" << endl;
-				else
-					cout << "Record with roll number " << rollNo << " deleted" << endl;
+				obj.hapus();
 				break;
 			case '3' :
-				obj.ascending();
+				obj.traverse();
 				break;
 			case '4': 
-				obj.descending();
+				obj.revtraverse();
 				break;
 			case '5' :
-				if (obj.ListEmpty() == true) {
-					cout << "\nList is Empty" << endl;
-					break;
-				}
-				Node* prev, * curr;
-				prev = curr = NULL;
-				cout << "\nENeter the roll number of the student whose record you want to search: ";
-				int num;
-				cin >> num;
-				if (obj.search(num, &prev, &curr) == false)
-					cout << "\nrecord not found" << endl;
-				else {
-					cout << "\nRecord found" << endl;
-					cout << "\nRecord number: " << curr->noMhs << endl;
-					cout << "\nName: " << curr->name << endl;
-				}
+				obj.searchData();
 				break;
 			case '6' :
 				return 0;
